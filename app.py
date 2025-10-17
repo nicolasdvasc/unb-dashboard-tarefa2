@@ -66,5 +66,28 @@ st.pyplot()
 
 st.subheader("Interpretação do Modelo e Recomendações")
 st.write("""
-(Cole aqui o seu texto de interpretação final que preenchemos)
+[cite_start]A análise de regressão linear múltipla permitiu construir um modelo preditivo para o preço de imóveis em Ames, Iowa, com base em suas características. A seguir, apresentamos os principais insights e recomendações estratégicas derivadas dos resultados, conforme solicitado na tarefa[cite: 22, 23].
+
+### **Principais Fatores de Valorização**
+
+[cite_start]O modelo estatístico identificou diversas características que impactam significativamente o valor de um imóvel[cite: 85]. As mais influentes foram:
+
+* [cite_start]**Qualidade Geral do Acabamento (`Overall Qual`):** Este é o fator de maior impacto individual no preço de venda[cite: 22]. O modelo indica que, para cada ponto adicional na escala de qualidade (de 1 a 10), o preço do imóvel tende a aumentar em aproximadamente **9.5%**, mantendo as outras características constantes. Isso demonstra que investimentos em materiais e acabamentos de alta qualidade têm um retorno financeiro claro.
+
+* **Área Útil do Imóvel (`Gr Liv Area`):** Como esperado, o tamanho do imóvel é um forte preditor de seu valor. A análise mostra que cada metro quadrado adicional na área útil acima do solo está associado a um aumento de aproximadamente **0.04%** no preço de venda. Embora pareça pouco, para um imóvel de 150m², isso representa um impacto considerável.
+
+* **Localização (`Neighborhood`):** A localização provou ser um fator crítico. [cite_start]Bairros como **Northridge Heights (`NridgHt`)** apresentam um prêmio significativo, aumentando o valor esperado de um imóvel em até **24%** em comparação com a área de referência do modelo[cite: 87].
+
+### **Recomendações Estratégicas**
+
+[cite_start]Com base nesses insights, as seguintes recomendações podem ser feitas para otimizar a tomada de decisão no mercado imobiliário[cite: 23, 86]:
+
+1.  **Para Investidores (Foco em Renovação):**
+    * Priorize a aquisição de imóveis com pontuação de `Overall Qual` abaixo de 7, mas que estejam localizados em bairros de alta demanda. A estratégia de "comprar para reformar", focando especificamente na melhoria da qualidade dos acabamentos, apresenta o maior potencial de valorização segundo o modelo.
+
+2.  **Para Corretores (Marketing Direcionado):**
+    * Utilize as características de maior impacto como pontos centrais nas campanhas de marketing. Destaque nos anúncios a "nota de qualidade do imóvel" (ex: "Acabamento nota 8/10") e a metragem quadrada de forma proeminente.
+    * Para imóveis em bairros premium como Northridge Heights, justifique o preço mais alto enfatizando o "efeito localização" que o modelo quantificou, informando aos clientes sobre a valorização média de 24% na região.
+
+*Esta análise é baseada em um modelo estatístico e deve ser usada como uma ferramenta de auxílio à decisão, complementando a experiência de mercado.*
 """)
