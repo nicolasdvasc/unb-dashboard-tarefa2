@@ -54,11 +54,42 @@ colunas_categoricas = ['Neighborhood', 'Bldg Type']
 # 4. O CÓDIGO ABAIXO PREPARA TUDO (NÃO PRECISA MEXER AQUI):
 df_reg = pd.get_dummies(df_reg, columns=colunas_categoricas, drop_first=True)
 df_reg['Log_SalePrice'] = np.log(df_reg['SalePrice'])
-X = df_reg.drop(['SalePrice', 'Log_SalePrice'], axis=1)
+# --- Substitua a definição de X e input_data por isto ---
+
+# Crie uma lista com os nomes exatos das colunas do seu modelo
+# IMPORTANTE: A ORDEM AQUI DEVE CORRESPONDER À ORDEM DOS SEUS WIDGETS (area, qualidade, banheiros)
+colunas_do_modelo = ['Gr Liv Area', 'Overall Qual', 'Full Bath']
+
+# Use a lista para definir X
+X = df_reg[colunas_do_modelo]
 y = df_reg['Log_SalePrice']
 X = sm.add_constant(X) # Adiciona a constante ao X
+
+# Treine o modelo
 model = LinearRegression()
 model.fit(X, y)
+
+# --- BARRA LATERAL COM FILTROS INTERATIVOS ---
+st.sidebar.header("Simulador de Preço do Imóvel")
+
+area = st.sidebar.slider("Área do Imóvel (Gr Liv Area)", int(X['Gr Liv Area'].min()), int(X['Gr Liv Area'].max()), int(X['Gr Liv Area'].mean()))
+qualidade = st.sidebar.selectbox("Qualidade Geral (Overall Qual)", sorted(X['Overall Qual'].unique()))
+banheiros = st.sidebar.selectbox("Banheiros (Full Bath)", sorted(X['Full Bath'].unique()))
+
+# --- PREDIÇÃO E RESULTADOS ---
+
+# Use A MESMA lista para criar o DataFrame de predição
+input_data = pd.DataFrame(
+    [[area, qualidade, banheiros]], 
+    columns=colunas_do_modelo
+)
+
+# Agora a predição vai funcionar
+prediction_log = model.predict(input_data)
+prediction = np.exp(prediction_log)
+
+st.subheader(f"Preço Estimado: ${prediction[0]:,.2f}")
+
 
 # --- BARRA LATERAL COM FILTROS INTERATIVOS ---
 st.sidebar.header("Simulador de Preço do Imóvel")
