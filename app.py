@@ -7,9 +7,6 @@ from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Para evitar um aviso comum do Streamlit
-st.set_option('deprecation.showPyplotGlobalUse', False)
-
 # --- TÍTULO ---
 st.title("Dashboard de Precificação Imobiliária - Tarefa 2 Bônus")
 st.markdown("Por: Nícolas Duarte Vasconcellos, 200042343")
