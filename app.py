@@ -59,10 +59,18 @@ st.subheader(f"Preço Estimado: ${prediction[0]:,.2f}")
 
 # --- GRÁFICOS E INTERPRETAÇÃO ---
 st.markdown("---")
+# CÓDIGO CORRIGIDO
 st.subheader("Análise Visual")
-sns.scatterplot(data=df_reg, x='Gr Liv Area', y='SalePrice', hue='Overall Qual')
-plt.title("Relação entre Área, Qualidade e Preço")
-st.pyplot()
+
+# 1. Crie a figura e os eixos primeiro
+fig, ax = plt.subplots()
+
+# 2. Diga ao Seaborn para usar os eixos que você criou (usando o argumento ax=ax)
+sns.scatterplot(data=df_reg, x='Gr Liv Area', y='SalePrice', hue='Overall Qual', ax=ax)
+ax.set_title("Relação entre Área, Qualidade e Preço") # Use ax.set_title para o título
+
+# 3. Passe a figura ('fig') para o comando do Streamlit
+st.pyplot(fig)
 
 st.subheader("Interpretação do Modelo e Recomendações")
 st.write("""
