@@ -20,69 +20,35 @@ def load_data():
 
 df = load_data()
 
-# --- PREPARAÇÃO DOS DADOS E TREINAMENTO DO MODELO ---
-# !!! IMPORTANTE: COPIE E COLE AQUI O SEU BLOCO DE PREPARAÇÃO DE DADOS FINAL !!!
-# (Aquele bloco "à prova de erros" que fizemos funcionar)
+# VVV COLE ESTE BLOCO INTEIRO NO LUGAR DO SEU CÓDIGO ANTIGO VVV
 
-# --- COLE ESTE BLOCO NO LUGAR DO CÓDIGO QUE VOCÊ APAGOU ---
+# --- PREPARAÇÃO, TREINAMENTO E PREDIÇÃO SINCRONIZADOS ---
 
-# 1. Defina TODAS as colunas que você quer usar no modelo
-# <-- AJUSTE ESTA LISTA COM OS NOMES EXATOS DAS SUAS COLUNAS!
-colunas_selecionadas = [
-    'Gr Liv Area',
-    'Overall Qual',
-    'Full Bath',
-    'Neighborhood',
-    'Bldg Type', # Exemplo, troque pelas suas colunas
-    'SalePrice'
-]
-df_reg = df[colunas_selecionadas].copy()
-
-
-# 2. ETAPA DE LIMPEZA IMPORTANTE (NÃO PRECISA MEXER AQUI):
-# Remove linhas onde SalePrice é 0 ou negativo (para evitar erro no np.log)
-df_reg = df_reg[df_reg['SalePrice'] > 0]
-# Remove QUALQUER linha que tenha QUALQUER valor faltando nas colunas selecionadas
-df_reg.dropna(inplace=True)
-
-
-# 3. Defina aqui APENAS as colunas que são de TEXTO
-# <-- AJUSTE ESTA LISTA TAMBÉM!
-colunas_categoricas = ['Neighborhood', 'Bldg Type']
-
-
-# 4. O CÓDIGO ABAIXO PREPARA TUDO (NÃO PRECISA MEXER AQUI):
-df_reg = pd.get_dummies(df_reg, columns=colunas_categoricas, drop_first=True)
-df_reg['Log_SalePrice'] = np.log(df_reg['SalePrice'])
-# --- Substitua a definição de X e input_data por isto ---
-
-# Crie uma lista com os nomes exatos das colunas do seu modelo
-# IMPORTANTE: A ORDEM AQUI DEVE CORRESPONDER À ORDEM DOS SEUS WIDGETS (area, qualidade, banheiros)
+# 1. Crie a "lista mestra" de colunas. A ordem aqui é TUDO.
+#    Adapte esta lista para as variáveis que VOCÊ usou.
 colunas_do_modelo = ['Gr Liv Area', 'Overall Qual', 'Full Bath']
 
-# Use a lista para definir X
+# 2. Use a lista para definir X e treinar o modelo
 X = df_reg[colunas_do_modelo]
 y = df_reg['Log_SalePrice']
-X = sm.add_constant(X) # Adiciona a constante ao X
-
-# Treine o modelo
 model = LinearRegression()
 model.fit(X, y)
 
 # --- BARRA LATERAL COM FILTROS INTERATIVOS ---
 st.sidebar.header("Simulador de Preço do Imóvel")
 
+# 3. A ordem dos seus widgets (slider, selectbox) DEVE seguir a ordem da "lista mestra"
 area = st.sidebar.slider("Área do Imóvel (Gr Liv Area)", int(X['Gr Liv Area'].min()), int(X['Gr Liv Area'].max()), int(X['Gr Liv Area'].mean()))
 qualidade = st.sidebar.selectbox("Qualidade Geral (Overall Qual)", sorted(X['Overall Qual'].unique()))
 banheiros = st.sidebar.selectbox("Banheiros (Full Bath)", sorted(X['Full Bath'].unique()))
 
 # --- PREDIÇÃO E RESULTADOS ---
 
-# Use A MESMA lista para criar o DataFrame de predição
-input_data = pd.DataFrame(
-    [[area, qualidade, banheiros]], 
-    columns=colunas_do_modelo
-)
+# 4. Agrupe os valores dos widgets na MESMA ORDEM da "lista mestra"
+valores_do_usuario = [area, qualidade, banheiros]
+
+# 5. Use a "lista mestra" para criar o DataFrame de predição, garantindo 100% de compatibilidade
+input_data = pd.DataFrame([valores_do_usuario], columns=colunas_do_modelo)
 
 # Agora a predição vai funcionar
 prediction_log = model.predict(input_data)
