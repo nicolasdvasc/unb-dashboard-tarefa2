@@ -72,7 +72,7 @@ A análise de regressão linear múltipla permitiu construir um modelo preditivo
 
 O modelo estatístico identificou diversas características que impactam significativamente o valor de um imóvel. As mais influentes foram:
 
-*Qualidade Geral do Acabamento (`Overall Qual`):** Este é o fator de maior impacto individual no preço de venda. O modelo indica que, para cada ponto adicional na escala de qualidade (de 1 a 10), o preço do imóvel tende a aumentar em aproximadamente **9.5%**, mantendo as outras características constantes. Isso demonstra que investimentos em materiais e acabamentos de alta qualidade têm um retorno financeiro claro.
+* **Qualidade Geral do Acabamento (`Overall Qual`):** Este é o fator de maior impacto individual no preço de venda. O modelo indica que, para cada ponto adicional na escala de qualidade (de 1 a 10), o preço do imóvel tende a aumentar em aproximadamente **9.5%**, mantendo as outras características constantes. Isso demonstra que investimentos em materiais e acabamentos de alta qualidade têm um retorno financeiro claro.
 
 * **Área Útil do Imóvel (`Gr Liv Area`):** Como esperado, o tamanho do imóvel é um forte preditor de seu valor. A análise mostra que cada metro quadrado adicional na área útil acima do solo está associado a um aumento de aproximadamente **0.04%** no preço de venda. Embora pareça pouco, para um imóvel de 150m², isso representa um impacto considerável.
 
