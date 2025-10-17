@@ -57,6 +57,8 @@ df_reg['Log_SalePrice'] = np.log(df_reg['SalePrice'])
 X = df_reg.drop(['SalePrice', 'Log_SalePrice'], axis=1)
 y = df_reg['Log_SalePrice']
 X = sm.add_constant(X) # Adiciona a constante ao X
+model = LinearRegression()
+model.fit(X, y)
 
 # --- BARRA LATERAL COM FILTROS INTERATIVOS ---
 st.sidebar.header("Simulador de Preço do Imóvel")
